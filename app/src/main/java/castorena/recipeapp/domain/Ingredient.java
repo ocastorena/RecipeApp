@@ -1,6 +1,7 @@
 package castorena.recipeapp.domain;
 
 public class Ingredient {
+    private int id;
     private String name;
     private String category;
 
@@ -18,5 +19,13 @@ public class Ingredient {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
