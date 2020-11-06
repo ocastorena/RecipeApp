@@ -11,10 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         android:text="Recipes"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +44,7 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/IngredientBtn"
+                android:id="@+id/RecipeBtn"
                 android:layout_width="350dp"
                 android:layout_height="150dp"
                 android:layout_marginBottom="16dp"

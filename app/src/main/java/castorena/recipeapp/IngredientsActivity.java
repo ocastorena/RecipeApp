@@ -1,15 +1,18 @@
 package castorena.recipeapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import castorena.recipeapp.service.IngredientSvcCacheImpl;
+
 public class IngredientsActivity extends AppCompatActivity {
+
+    IngredientSvcCacheImpl svc = IngredientSvcCacheImpl.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +26,31 @@ public class IngredientsActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.ingredients);
 
         //perform ItemSelectedListener
-        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.recipes:
-                        startActivity(new Intent(getApplicationContext(),RecipesActivity.class));
-                        overridePendingTransition(0,0);
-                }
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.recipes) {
+                startActivity(new Intent(getApplicationContext(), RecipesActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
             }
+            return false;
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Button btn = findViewById(R.id.vegetablesBtn);
+        Button fruit = findViewById(R.id.fruitsBtn);
+        btn.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), IngredientDetailsActivity.class));
+            svc.setCurrCategory("Vegetables");
+            overridePendingTransition(0,0);
+        });
+
+        fruit.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), IngredientDetailsActivity.class));
+            svc.setCurrCategory("Fruits");
+            overridePendingTransition(0,0);
         });
     }
 }

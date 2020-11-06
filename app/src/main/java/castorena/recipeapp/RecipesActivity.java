@@ -1,13 +1,14 @@
 package castorena.recipeapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import castorena.recipeapp.domain.Recipe;
 
 public class RecipesActivity extends AppCompatActivity {
 
@@ -23,15 +24,25 @@ public class RecipesActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.recipes);
 
         //perform ItemSelectedListener
-        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.ingredients:
-                        startActivity(new Intent(getApplicationContext(),IngredientsActivity.class));
-                        overridePendingTransition(0,0);
-                }
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.ingredients) {
+                startActivity(new Intent(getApplicationContext(), IngredientsActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
             }
+            return false;
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Button btn = findViewById(R.id.RecipeBtn);
+
+        btn.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), RecipeDetailsActivity.class));
+            overridePendingTransition(0,0);
         });
     }
 }

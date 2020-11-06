@@ -1,6 +1,8 @@
 package castorena.recipeapp.domain;
 
-public class Ingredient {
+import java.io.Serializable;
+
+public class Ingredient implements Serializable {
     private int id;
     private String name;
     private String category;
@@ -27,5 +29,10 @@ public class Ingredient {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

@@ -9,16 +9,22 @@ public class IngredientSvcCacheImpl implements IngredientSvcInt{
 
     private int nextId = 0;
     private List<Ingredient> ingredients = new LinkedList<>();
+    private String currCategory;
 
     private IngredientSvcCacheImpl() {
         initList();
     }
 
     private void initList() {
-        Ingredient ingredient = new Ingredient();
-        ingredient.setName("Carrot");
-        ingredient.setCategory("Vegetables");
-        ingredients.add(ingredient);
+        Ingredient ingredient1 = new Ingredient();
+        ingredient1.setName("Carrot");
+        ingredient1.setCategory("Vegetables");
+        ingredients.add(ingredient1);
+
+        Ingredient ingredient2 = new Ingredient();
+        ingredient2.setName("Apple");
+        ingredient2.setCategory("Fruits");
+        ingredients.add(ingredient2);
     }
 
     private static IngredientSvcCacheImpl instance = new IngredientSvcCacheImpl();
@@ -33,8 +39,14 @@ public class IngredientSvcCacheImpl implements IngredientSvcInt{
         return ingredient;
     }
 
-    public List<Ingredient> retrieveAll() {
-        return ingredients;
+    public List<Ingredient> retrieveAllByCategory(String category) {
+        List<Ingredient> list = new LinkedList<>();
+        for (int i = 0; i < ingredients.size(); i++) {
+            if (ingredients.get(i).getCategory().equals(category)) {
+                list.add(ingredients.get(i));
+            }
+        }
+        return list;
     }
 
     public Ingredient update(Ingredient ingredient) {
@@ -59,4 +71,11 @@ public class IngredientSvcCacheImpl implements IngredientSvcInt{
         return ingredient;
     }
 
+    public String getCurrCategory() {
+        return currCategory;
+    }
+
+    public void setCurrCategory(String currCategory) {
+        this.currCategory = currCategory;
+    }
 }
