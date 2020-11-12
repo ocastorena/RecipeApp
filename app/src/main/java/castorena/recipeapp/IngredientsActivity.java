@@ -8,11 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import castorena.recipeapp.service.IngredientSvcCacheImpl;
-
 public class IngredientsActivity extends AppCompatActivity {
-
-    IngredientSvcCacheImpl svc = IngredientSvcCacheImpl.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +35,41 @@ public class IngredientsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Button btn = findViewById(R.id.vegetablesBtn);
+
+        Intent intent = new Intent(getApplicationContext(), IngredientDetailsActivity.class);
+        Button vegg = findViewById(R.id.vegetablesBtn);
         Button fruit = findViewById(R.id.fruitsBtn);
-        btn.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), IngredientDetailsActivity.class));
-            svc.setCurrCategory("Vegetables");
+        Button dairy = findViewById(R.id.dairyBtn);
+        Button fish = findViewById(R.id.fishBtn);
+        Button meats = findViewById(R.id.meatsBtn);
+
+        vegg.setOnClickListener(v -> {
+            intent.putExtra("category", "vegetables");
+            startActivity(intent);
             overridePendingTransition(0,0);
         });
 
         fruit.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), IngredientDetailsActivity.class));
-            svc.setCurrCategory("Fruits");
+            intent.putExtra("category", "fruits");
+            startActivity(intent);
+            overridePendingTransition(0,0);
+        });
+
+        dairy.setOnClickListener(v -> {
+            intent.putExtra("category", "dairy");
+            startActivity(intent);
+            overridePendingTransition(0,0);
+        });
+
+        fish.setOnClickListener(v -> {
+            intent.putExtra("category", "fish");
+            startActivity(intent);
+            overridePendingTransition(0,0);
+        });
+
+        meats.setOnClickListener(v -> {
+            intent.putExtra("category", "meats");
+            startActivity(intent);
             overridePendingTransition(0,0);
         });
     }

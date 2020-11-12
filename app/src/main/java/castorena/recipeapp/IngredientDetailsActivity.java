@@ -9,25 +9,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Arrays;
 import java.util.List;
-
-import castorena.recipeapp.domain.Ingredient;
-import castorena.recipeapp.service.IngredientSvcCacheImpl;
-import castorena.recipeapp.service.IngredientSvcInt;
 
 public class IngredientDetailsActivity extends AppCompatActivity {
 
-    private ListView listView = null;
-    private IngredientSvcInt ingredSvc = null;
-    private ArrayAdapter adapter = null;
+    private String currCategory;
+    private ListView listView;
+    private List<String> ingredList;
+    //private IngredientSvcInt ingredSvc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredient_details);
 
-        listView = (ListView)findViewById(R.id.ingredientsList);
-        ingredSvc = IngredientSvcCacheImpl.getInstance();
+        listView = findViewById(R.id.ingredientsList);
+        //ingredSvc = IngredientSvc.getInstance(this);
+
+        Intent intent = getIntent();
+        currCategory = intent.getStringExtra("category");
 
         //initialize and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -54,10 +55,26 @@ public class IngredientDetailsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        final List<Ingredient> ingredlist = ingredSvc.retrieveAllByCategory(ingredSvc.getCurrCategory());
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, ingredlist);
-        listView.setAdapter(adapter);
+        switch (currCategory) {
+            case ("vegetables"):
+                ingredList = Arrays.asList(getResources().getStringArray(R.array.vegetables));
+                break;
+            case ("fruits"):
+                ingredList = Arrays.asList(getResources().getStringArray(R.array.fruits));
+                break;
+            case ("dairy"):
+                ingredList = Arrays.asList(getResources().getStringArray(R.array.dairy));
+                break;
+            case ("fish"):
+                ingredList = Arrays.asList(getResources().getStringArray(R.array.fish));
+                break;
+            case ("meats"):
+                ingredList = Arrays.asList(getResources().getStringArray(R.array.meats));
+                break;
+        }
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ingredList);
+        listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 }

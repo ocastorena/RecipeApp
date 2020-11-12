@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="vegetables">
+        <item>Broccoli</item>
+        <item>Carrots</item>
+        <item>Lettuce</item>
+        <item>Spinach</item>
+        <item>Asparagus</item>
+    </string-array>
+
+    <string-array name="fruits">
+        <item>Apples</item>
+        <item>Strawberries</item>
+        <item>Pineapple</item>
+        <item>Avocado</item>
+        <item>Tomato</item>
+    </string-array>
+
+    <string-array name="dairy">
+        <item>Milk</item>
+        <item>Cheese</item>
+        <item>Yogurt</item>
+    </string-array>
+
+    <string-array name="fish">
+        <item>Salmon</item>
+        <item>Cod</item>
+        <item>Tuna</item>
+        <item>Trout</item>
+        <item>Tilapia</item>
+    </string-array>
+
+    <string-array name="meats">
+        <item>Chicken</item>
+        <item>Steak</item>
+        <item>Turkey</item>
+        <item>Lamb</item>
+        <item>Veal</item>
+    </string-array>
+</resources>
