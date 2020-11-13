@@ -8,12 +8,11 @@
     tools:context=".IngredientsActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/numIngredText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Ingredients"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView"
         app:layout_constraintEnd_toEndOf="parent"

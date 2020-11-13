@@ -12,12 +12,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Arrays;
 import java.util.List;
 
+import castorena.recipeapp.domain.Ingredient;
+import castorena.recipeapp.service.IngredientSvc;
+import castorena.recipeapp.service.IngredientSvcInt;
+
 public class IngredientDetailsActivity extends AppCompatActivity {
 
     private String currCategory;
     private ListView listView;
     private List<String> ingredList;
-    //private IngredientSvcInt ingredSvc;
+    private IngredientSvcInt ingredSvc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +29,7 @@ public class IngredientDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ingredient_details);
 
         listView = findViewById(R.id.ingredientsList);
-        //ingredSvc = IngredientSvc.getInstance(this);
+        ingredSvc = IngredientSvc.getInstance(this);
 
         Intent intent = getIntent();
         currCategory = intent.getStringExtra("category");
@@ -76,5 +80,14 @@ public class IngredientDetailsActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ingredList);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            if (ingredList.get(position).equals("Apples")) {
+                Ingredient ingredient = new Ingredient();
+                ingredient.setName("Apples");
+                ingredient.setCategory("Fruits");
+                ingredSvc.create(ingredient);
+            }
+        });
     }
 }
