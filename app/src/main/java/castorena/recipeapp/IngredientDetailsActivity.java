@@ -2,6 +2,8 @@ package castorena.recipeapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.InputQueue;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -22,6 +24,8 @@ public class IngredientDetailsActivity extends AppCompatActivity {
     private ListView listView;
     private List<String> ingredList;
     private IngredientSvcInt ingredSvc;
+    private List<String> savedIngredList;
+    private int checked = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,7 @@ public class IngredientDetailsActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.ingredientsList);
         ingredSvc = IngredientSvc.getInstance(this);
+        savedIngredList = ingredSvc.retrieveAllNames();
 
         Intent intent = getIntent();
         currCategory = intent.getStringExtra("category");
@@ -77,17 +82,36 @@ public class IngredientDetailsActivity extends AppCompatActivity {
                 break;
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ingredList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, ingredList);
+
         listView.setAdapter(adapter);
+
+        if (checked == 0) {
+            checkCurrItems();
+            checked++;
+        }
+
         adapter.notifyDataSetChanged();
 
+        // creates new ingredient in db depending on the item clicked
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            if (ingredList.get(position).equals("Apples")) {
-                Ingredient ingredient = new Ingredient();
-                ingredient.setName("Apples");
-                ingredient.setCategory("Fruits");
+            Ingredient ingredient = new Ingredient();
+            if (!listView.isItemChecked(position)) {
+                ingredient.setName(ingredList.get(position));
+                ingredSvc.delete(ingredient);
+            } else {
+                ingredient.setName(ingredList.get(position));
+                ingredient.setCategory(currCategory);
                 ingredSvc.create(ingredient);
             }
         });
+    }
+
+    private void checkCurrItems() {
+        for (int i = 0; i < ingredList.size(); i++) {
+            if (savedIngredList.contains(ingredList.get(i))) {
+                listView.setItemChecked(i, true);
+            }
+        }
     }
 }

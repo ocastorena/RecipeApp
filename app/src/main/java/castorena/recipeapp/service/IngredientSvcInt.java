@@ -9,4 +9,5 @@ public interface IngredientSvcInt {
     Ingredient create(Ingredient contact);
     List<Ingredient> retrieveAll();
     Ingredient delete(Ingredient ingredient);
+    List<String> retrieveAllNames();
 }

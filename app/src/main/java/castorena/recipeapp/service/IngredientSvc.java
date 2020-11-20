@@ -80,19 +80,36 @@ public class IngredientSvc extends SQLiteOpenHelper implements IngredientSvcInt 
         return ingredients;
     }
 
-    private Ingredient getIngredient(Cursor cursor) {
-        Ingredient ingredient = new Ingredient();
-        ingredient.setId(cursor.getInt(0));
-        ingredient.setName(cursor.getString(1));
-        ingredient.setCategory(cursor.getString(2));
-        return ingredient;
+    public List<String> retrieveAllNames() {
+        List<String> names = new ArrayList<>();
+        String[] columns = {"id", "name", "category"};
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query("ingredients", columns, null, null, null, null, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Ingredient ingredient = getIngredient(cursor);
+            names.add(ingredient.getName());
+            cursor.moveToNext();
+        }
+        db.close();
+        return names;
     }
 
     @Override
     public Ingredient delete(Ingredient ingredient) {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete("ingredients", "id = " + ingredient.getId(), null);
+        String whereClause = "name=?";
+        String[] whereArgs = {ingredient.getName().toString()};
+        db.delete("ingredients", whereClause, whereArgs);
         db.close();
+        return ingredient;
+    }
+
+    private Ingredient getIngredient(Cursor cursor) {
+        Ingredient ingredient = new Ingredient();
+        ingredient.setId(cursor.getInt(0));
+        ingredient.setName(cursor.getString(1));
+        ingredient.setCategory(cursor.getString(2));
         return ingredient;
     }
 }
