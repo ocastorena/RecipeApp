@@ -50,7 +50,7 @@ public class IngredientsActivity extends AppCompatActivity {
         Button dairy = findViewById(R.id.dairyBtn);
         Button fish = findViewById(R.id.fishBtn);
         Button meats = findViewById(R.id.meatsBtn);
-        TextView text = (TextView) findViewById(R.id.numIngredText);
+        TextView text = (TextView) findViewById(R.id.recipeNameText);
         text.setText(" You have " + ingredientSvc.retrieveAll().size() + " ingredients");
 
         vegg.setOnClickListener(v -> {

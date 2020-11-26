@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <recipe>
-        <name>recipename</name>
-        <string-array name="ingredients">
-            <item>apple</item>
-            <item>orange</item>
-            <item>banana</item>
-        </string-array>
-        <instructions>
-            <step-1>put the food in the oven</step-1>
-            <step-2>cook the food</step-2>
-            <step-3>eat the food</step-3>
-        </instructions>
-    </recipe>
+    <string name="recipe_1_name">Recipe 1</string>
+    <string-array name="recipe_1_ingred">
+        <item>apple</item>
+        <item>orange</item>
+        <item>banana</item>
+    </string-array>
+    <string-array name="recipe_1_steps">
+        <item>Step 1: put the food in the oven</item>
+        <item>Step 2: cook the food</item>
+        <item>Step 3: eat the food</item>
+    </string-array>
 </resources>

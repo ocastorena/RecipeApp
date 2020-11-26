@@ -2,13 +2,15 @@ package castorena.recipeapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import castorena.recipeapp.domain.Recipe;
+import castorena.recipeapp.service.IngredientSvc;
+import castorena.recipeapp.service.IngredientSvcInt;
 
 public class RecipesActivity extends AppCompatActivity {
 
@@ -22,6 +24,9 @@ public class RecipesActivity extends AppCompatActivity {
 
         //set ingredients selected
         bottomNavigationView.setSelectedItemId(R.id.recipes);
+
+        //get service
+        IngredientSvcInt svc = IngredientSvc.getInstance(this);
 
         //perform ItemSelectedListener
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -38,11 +43,14 @@ public class RecipesActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        Button btn = findViewById(R.id.RecipeBtn);
-
-        btn.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), RecipeDetailsActivity.class));
-            overridePendingTransition(0,0);
-        });
+        if (true) {
+            Button btn = findViewById(R.id.RecipeBtn);
+            btn.setText(R.string.recipe_1_name);
+            btn.setVisibility(View.VISIBLE);
+            btn.setOnClickListener(v -> {
+                startActivity(new Intent(getApplicationContext(), RecipeDetailsActivity.class));
+                overridePendingTransition(0,0);
+            });
+        }
     }
 }

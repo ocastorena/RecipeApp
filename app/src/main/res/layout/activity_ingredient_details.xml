@@ -7,7 +7,7 @@
     tools:context=".IngredientDetailsActivity">
 
     <TextView
-        android:id="@+id/numIngredText"
+        android:id="@+id/recipeNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numIngredText" />
+        app:layout_constraintTop_toBottomOf="@+id/recipeNameText" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
