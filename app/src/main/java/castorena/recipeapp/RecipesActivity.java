@@ -3,21 +3,35 @@ package castorena.recipeapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
+import castorena.recipeapp.domain.Ingredient;
 import castorena.recipeapp.service.IngredientSvc;
 import castorena.recipeapp.service.IngredientSvcInt;
 
 public class RecipesActivity extends AppCompatActivity {
+    private ListView listView;
+    private ArrayList<String> recipeList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_recipes);
+
+        listView = findViewById(R.id.recipeList);
+
+        recipeList.add("bake chicken breast");
 
         //initialize and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -43,14 +57,18 @@ public class RecipesActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (true) {
-            Button btn = findViewById(R.id.RecipeBtn);
-            btn.setText(R.string.recipe_1_name);
-            btn.setVisibility(View.VISIBLE);
-            btn.setOnClickListener(v -> {
-                startActivity(new Intent(getApplicationContext(), RecipeDetailsActivity.class));
-                overridePendingTransition(0,0);
-            });
-        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipeList);
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(getApplicationContext(), RecipeDetailsActivity.class);
+
+            startActivity(intent);
+
+            overridePendingTransition(0,0);
+
+        });
     }
+
 }
