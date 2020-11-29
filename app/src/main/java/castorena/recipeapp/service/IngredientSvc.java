@@ -42,7 +42,7 @@ public class IngredientSvc extends SQLiteOpenHelper implements IngredientSvcInt 
         return instance;
     }
 
-    public  IngredientSvc(Context context) {
+    public IngredientSvc(Context context) {
         super(context, DBNAME, null, DBVERSION);
     }
 

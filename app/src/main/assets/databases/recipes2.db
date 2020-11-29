@@ -1,0 +1,27 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "recipe_ingredients" (
+	"recipe_name"	TEXT,
+	"ingredient"	TEXT
+);
+CREATE TABLE IF NOT EXISTS "recipe_names" (
+	"recipe_name"	TEXT
+);
+CREATE TABLE IF NOT EXISTS "recipe_steps" (
+	"recipe_name"	TEXT,
+	"step_number"	INTEGER,
+	"instruction"	TEXT
+);
+INSERT INTO "recipe_ingredients" VALUES ('Baked Chicken Breast','Chicken');
+INSERT INTO "recipe_ingredients" VALUES ('Baked Chicken Breast','Paprika');
+INSERT INTO "recipe_ingredients" VALUES ('Baked Chicken Breast','Oregano');
+INSERT INTO "recipe_ingredients" VALUES ('Baked Chicken Breast','Garlic');
+INSERT INTO "recipe_ingredients" VALUES ('Baked Chicken Breast','Salt');
+INSERT INTO "recipe_ingredients" VALUES ('Baked Chicken Breast','Pepper');
+INSERT INTO "recipe_ingredients" VALUES ('Baked Chicken Breast','Olive Oil');
+INSERT INTO "recipe_names" VALUES ('Baked Chicken Breast');
+INSERT INTO "recipe_steps" VALUES ('Baked Chicken Breast',1,'Step 1: Preheat oven to 450 degrees F');
+INSERT INTO "recipe_steps" VALUES ('Baked Chicken Breast',2,'Step 2: Season chicken breast by drizzling it with oil, sprinkling spices and tossing around right in baking dish');
+INSERT INTO "recipe_steps" VALUES ('Baked Chicken Breast',3,'Step 3: Bake uncovered for 25 minutes');
+INSERT INTO "recipe_steps" VALUES ('Baked Chicken Breast',4,'Step 4: Let it rest covered for 10 minutes');
+INSERT INTO "recipe_steps" VALUES ('Baked Chicken Breast',5,'Step 5: Slice against the grain');
+COMMIT;

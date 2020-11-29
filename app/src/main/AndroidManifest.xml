@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipeApp">
-
         <activity android:name=".RecipeDetailsActivity" />
+
         <activity android:name=".IngredientDetailsActivity" />
         <activity android:name=".IngredientsActivity">
             <intent-filter>
@@ -20,6 +20,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".RecipesActivity" />
+        <service
+            android:name=".service.RecipeSvc"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

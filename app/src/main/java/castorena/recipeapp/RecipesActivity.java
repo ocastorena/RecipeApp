@@ -14,14 +14,18 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import castorena.recipeapp.domain.Ingredient;
 import castorena.recipeapp.service.IngredientSvc;
 import castorena.recipeapp.service.IngredientSvcInt;
+import castorena.recipeapp.service.RecipeSvc;
+import castorena.recipeapp.service.RecipeSvcInt;
 
 public class RecipesActivity extends AppCompatActivity {
     private ListView listView;
-    private ArrayList<String> recipeList = new ArrayList<String>();
+    private List<String> recipeList;
+    private RecipeSvcInt svc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +33,19 @@ public class RecipesActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_recipes);
 
+        svc = RecipeSvc.getInstance(this);
+
+        try {
+            svc.createDB();
+            svc.openDB();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
         listView = findViewById(R.id.recipeList);
 
-        recipeList.add("bake chicken breast");
+        recipeList = svc.retrieveAllRecipeNames();
 
         //initialize and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
