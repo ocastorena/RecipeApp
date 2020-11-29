@@ -2,30 +2,22 @@ package castorena.recipeapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import castorena.recipeapp.domain.Ingredient;
+import castorena.recipeapp.service.DatabaseAccess;
 import castorena.recipeapp.service.IngredientSvc;
 import castorena.recipeapp.service.IngredientSvcInt;
-import castorena.recipeapp.service.RecipeSvc;
-import castorena.recipeapp.service.RecipeSvcInt;
 
 public class RecipesActivity extends AppCompatActivity {
     private ListView listView;
     private List<String> recipeList;
-    private RecipeSvcInt svc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,19 +25,11 @@ public class RecipesActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_recipes);
 
-        svc = RecipeSvc.getInstance(this);
-
-        try {
-            svc.createDB();
-            svc.openDB();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
         listView = findViewById(R.id.recipeList);
-
-        recipeList = svc.retrieveAllRecipeNames();
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+        databaseAccess.open();
+        recipeList = databaseAccess.getNames();
+        databaseAccess.close();
 
         //initialize and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
