@@ -2,11 +2,12 @@ package castorena.recipeapp.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Recipe implements Serializable{
     private String name;
-    private ArrayList<String> ingredients;
-    private ArrayList<String> steps;
+    private List<String> ingredients;
+    private List<String> steps;
 
 
     public String getName() {
@@ -17,19 +18,19 @@ public class Recipe implements Serializable{
         this.name = name;
     }
 
-    public ArrayList<String> getIngredients() {
+    public List<String> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(ArrayList<String> ingredients) {
+    public void setIngredients(List<String> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public ArrayList<String> getSteps() {
+    public List<String> getSteps() {
         return steps;
     }
 
-    public void setSteps(ArrayList<String> steps) {
+    public void setSteps(List<String> steps) {
         this.steps = steps;
     }
 
