@@ -15,17 +15,27 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Arrays;
 import java.util.List;
 
+import castorena.recipeapp.domain.Recipe;
+import castorena.recipeapp.service.DatabaseAccess;
+
 public class RecipeDetailsActivity extends AppCompatActivity {
 
     private ListView listViewIngred;
     private ListView listViewSteps;
     private List<String> ingredList;
     private List<String> ingredSteps;
+    private DatabaseAccess databaseAccess;
+    private String currRecipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
+
+        databaseAccess = DatabaseAccess.getInstance(this);
+
+        Intent intent = getIntent();
+        currRecipe = intent.getStringExtra("recipe_name");
 
         //initialize and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -55,15 +65,18 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        databaseAccess.open();
+        Recipe recipe = databaseAccess.getRecipe(currRecipe);
+        databaseAccess.close();
+        System.out.println(recipe.getName());
         TextView recipeName = findViewById(R.id.recipeNameText);
-        recipeName.setText(R.string.recipe_1_name);
+        recipeName.setText(recipe.getName());
 
-        ingredList = Arrays.asList(getResources().getStringArray(R.array.recipe_1_ingred));
+        ingredList = recipe.getIngredients();
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ingredList);
         listViewIngred.setAdapter(adapter1);
 
-        ingredSteps = Arrays.asList(getResources().getStringArray(R.array.recipe_1_steps));
+        ingredSteps = recipe.getSteps();
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ingredSteps);
         listViewSteps.setAdapter(adapter2);
 

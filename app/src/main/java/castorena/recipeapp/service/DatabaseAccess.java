@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import castorena.recipeapp.domain.Recipe;
+
 public class DatabaseAccess {
     private SQLiteOpenHelper openHelper;
     private SQLiteDatabase database;
@@ -57,15 +59,54 @@ public class DatabaseAccess {
       *
       * @return a List of quotes
       */
-    public List<String> getNames() {
+    public List<String> getNames(List<String> userIngred) {
         List<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM recipe_names", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM recipe_ingredients", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            list.add(cursor.getString(0));
+            if (userIngred.contains(cursor.getString(1))) {
+                if (!list.contains(cursor.getString(0))) {
+                    list.add(cursor.getString(0));
+                }
+            }
             cursor.moveToNext();
         }
         cursor.close();
         return list;
+    }
+
+    public List<String> getRecipeIngredients(String recipeName) {
+        List<String> list = new ArrayList<>();
+        String query = "SELECT * FROM recipe_ingredients WHERE recipe_name = '" + recipeName + "'";
+        Cursor cursor = database.rawQuery(query, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(cursor.getString(1));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public List<String> getRecipeSteps(String recipeName) {
+        List<String> list = new ArrayList<>();
+        String query = "SELECT * FROM recipe_steps WHERE recipe_name = '" + recipeName + "' ORDER BY step_number ASC";
+        Cursor cursor = database.rawQuery(query, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(cursor.getString(2));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public Recipe getRecipe(String recipeName) {
+        System.out.println(recipeName);
+        Recipe recipe = new Recipe();
+        recipe.setName(recipeName);
+        recipe.setIngredients(getRecipeIngredients(recipeName));
+        recipe.setSteps(getRecipeSteps(recipeName));
+        return recipe;
     }
 }

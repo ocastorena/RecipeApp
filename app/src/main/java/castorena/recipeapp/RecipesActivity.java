@@ -11,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
+import castorena.recipeapp.domain.Ingredient;
 import castorena.recipeapp.service.DatabaseAccess;
 import castorena.recipeapp.service.IngredientSvc;
 import castorena.recipeapp.service.IngredientSvcInt;
@@ -18,6 +19,9 @@ import castorena.recipeapp.service.IngredientSvcInt;
 public class RecipesActivity extends AppCompatActivity {
     private ListView listView;
     private List<String> recipeList;
+    private List<String> userIngred;
+    private DatabaseAccess databaseAccess;
+    private IngredientSvcInt svc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +30,7 @@ public class RecipesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
 
         listView = findViewById(R.id.recipeList);
-        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
-        databaseAccess.open();
-        recipeList = databaseAccess.getNames();
-        databaseAccess.close();
+        databaseAccess = DatabaseAccess.getInstance(this);
 
         //initialize and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -38,7 +39,7 @@ public class RecipesActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.recipes);
 
         //get service
-        IngredientSvcInt svc = IngredientSvc.getInstance(this);
+        svc = IngredientSvc.getInstance(this);
 
         //perform ItemSelectedListener
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -55,18 +56,24 @@ public class RecipesActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        userIngred = svc.retrieveAllNames();
+
+        databaseAccess.open();
+        recipeList = databaseAccess.getNames(userIngred);
+        databaseAccess.close();
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipeList);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(getApplicationContext(), RecipeDetailsActivity.class);
-
-            startActivity(intent);
-
-            overridePendingTransition(0,0);
-
+           String recipeName = recipeList.get(position);
+           Intent intent = new Intent(getApplicationContext(), RecipeDetailsActivity.class);
+            intent.putExtra("recipe_name", recipeName);
+           startActivity(intent);
+           overridePendingTransition(0,0);
         });
+
     }
 
 }
