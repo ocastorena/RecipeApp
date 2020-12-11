@@ -1,40 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="vegetables">
-        <item>Broccoli</item>
-        <item>Carrots</item>
-        <item>Lettuce</item>
+        <item>Green Beans</item>
+        <item>Cauliflower</item>
+        <item>Onion</item>
+        <item>Tomatoes</item>
         <item>Spinach</item>
+        <item>Garlic</item>
+        <item>Parsley</item>
         <item>Asparagus</item>
+        <item>Vegetable Broth</item>
+        <item>Vegetable Stock</item>
+        <item>Zucchini Noodles</item>
+        <item>Thyme</item>
+        <item>Cilantro</item>
+        <item>Basil</item>
     </string-array>
 
     <string-array name="fruits">
-        <item>Apples</item>
-        <item>Strawberries</item>
-        <item>Pineapple</item>
-        <item>Avocado</item>
-        <item>Tomato</item>
+        <item>Lemon</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
     </string-array>
 
     <string-array name="dairy">
-        <item>Milk</item>
-        <item>Cheese</item>
-        <item>Yogurt</item>
+        <item>Butter</item>
+        <item>Mozzarella</item>
+        <item>Parmesan</item>
+        <item>Heavy Cream</item>
     </string-array>
 
     <string-array name="fish">
         <item>Salmon</item>
-        <item>Cod</item>
-        <item>Tuna</item>
-        <item>Trout</item>
-        <item>Tilapia</item>
+        <item>Shrimp</item>
+        <item></item>
+        <item></item>
+        <item></item>
     </string-array>
 
     <string-array name="meats">
         <item>Chicken</item>
-        <item>Steak</item>
-        <item>Turkey</item>
-        <item>Lamb</item>
-        <item>Veal</item>
+        <item>TUrkey</item>
+        <item>Sirloin Steak</item>
+        <item></item>
+        <item>Chicken Stock</item>
+        <item>Chicken Broth</item>
+    </string-array>
+
+    <string-array name="Extras">
+        <item>Paprika</item>
+        <item>Onion Powder</item>
+        <item>Salt</item>
+        <item>Black Pepper</item>
+        <item>k</item>
+        <item>Hot Sauce</item>
+        <item>Olive Oil</item>
+        <item>Italian Seasoning</item>
+        <item>Soy Sauce</item>
+        <item>Spaghetti</item>
     </string-array>
 </resources>
