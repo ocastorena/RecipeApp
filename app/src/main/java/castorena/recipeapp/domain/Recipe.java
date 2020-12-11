@@ -1,14 +1,15 @@
 package castorena.recipeapp.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is for Recipe objects
+ */
 public class Recipe implements Serializable{
     private String name;
     private List<String> ingredients;
     private List<String> steps;
-
 
     public String getName() {
         return name;

@@ -1,18 +1,15 @@
 package castorena.recipeapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.Arrays;
 import java.util.List;
 
 import castorena.recipeapp.domain.Recipe;
@@ -22,8 +19,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
     private ListView listViewIngred;
     private ListView listViewSteps;
-    private List<String> ingredList;
-    private List<String> ingredSteps;
     private DatabaseAccess databaseAccess;
     private String currRecipe;
 
@@ -72,11 +67,11 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         TextView recipeName = findViewById(R.id.recipeNameText);
         recipeName.setText(recipe.getName());
 
-        ingredList = recipe.getIngredients();
+        List<String> ingredList = recipe.getIngredients();
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ingredList);
         listViewIngred.setAdapter(adapter1);
 
-        ingredSteps = recipe.getSteps();
+        List<String> ingredSteps = recipe.getSteps();
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ingredSteps);
         listViewSteps.setAdapter(adapter2);
 

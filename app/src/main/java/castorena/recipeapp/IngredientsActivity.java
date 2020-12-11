@@ -1,5 +1,6 @@
 package castorena.recipeapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -40,6 +41,7 @@ public class IngredientsActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onResume() {
         super.onResume();

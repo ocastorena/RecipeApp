@@ -11,7 +11,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
-import castorena.recipeapp.domain.Ingredient;
 import castorena.recipeapp.service.DatabaseAccess;
 import castorena.recipeapp.service.IngredientSvc;
 import castorena.recipeapp.service.IngredientSvcInt;
@@ -19,7 +18,6 @@ import castorena.recipeapp.service.IngredientSvcInt;
 public class RecipesActivity extends AppCompatActivity {
     private ListView listView;
     private List<String> recipeList;
-    private List<String> userIngred;
     private DatabaseAccess databaseAccess;
     private IngredientSvcInt svc;
 
@@ -56,7 +54,7 @@ public class RecipesActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        userIngred = svc.retrieveAllNames();
+        List<String> userIngred = svc.retrieveAllNames();
 
         databaseAccess.open();
         recipeList = databaseAccess.getNames(userIngred);

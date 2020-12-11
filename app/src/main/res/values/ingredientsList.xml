@@ -19,10 +19,6 @@
 
     <string-array name="fruits">
         <item>Lemon</item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
     </string-array>
 
     <string-array name="dairy">
@@ -35,16 +31,12 @@
     <string-array name="fish">
         <item>Salmon</item>
         <item>Shrimp</item>
-        <item></item>
-        <item></item>
-        <item></item>
     </string-array>
 
     <string-array name="meats">
         <item>Chicken</item>
-        <item>TUrkey</item>
+        <item>Turkey</item>
         <item>Sirloin Steak</item>
-        <item></item>
         <item>Chicken Stock</item>
         <item>Chicken Broth</item>
     </string-array>

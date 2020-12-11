@@ -2,6 +2,9 @@ package castorena.recipeapp.domain;
 
 import java.io.Serializable;
 
+/**
+ * This class is for Ingredient objects
+ */
 public class Ingredient implements Serializable {
     private int id;
     private String name;
